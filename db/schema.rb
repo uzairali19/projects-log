@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_120616) do
+ActiveRecord::Schema.define(version: 2021_09_09_121023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,16 @@ ActiveRecord::Schema.define(version: 2021_09_09_120616) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "project_id", null: false
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["project_id"], name: "index_users_on_project_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "courses", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "users", "courses"
+  add_foreign_key "users", "projects"
 end
