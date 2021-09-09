@@ -1,0 +1,39 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: "navbar-item" do%>
+      <%= image_tag("marketing.png", :alt => "Logo") %>
+    <% end %>
+    <%= link_to registration_path(resource_name), class: "navbar-item is-centered margin-auto" do  %>
+      <h1 class="title is-6 has-text-white"><%= @page_title || "Projects" %></h1>
+    <% end %>
+    <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="field is-grouped">
+        <p class="control">
+          <%= link_to 'Create New Project', new_project_path, class:"button is-white"%>
+        </p>
+        <% if user_signed_in? %>
+          <p class="control">
+            <%= link_to current_user.name, edit_user_registration_path, class:"button is-info"%>
+          </p>
+          <p class="control">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-danger"%>
+          </p>
+        <% else %>
+          <p class="control">
+            <%= link_to 'Sign In', new_user_session_path , class:"button is-info"%>
+          </p>
+          <p class="control">
+            <%= link_to 'Sign Up', new_user_registration_path , class:"button is-success"%>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
