@@ -1,29 +1,48 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>Hours</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.project %></td>
-        <td><%= project.hours %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+<% @page_title="Projects"  %>
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Total No. Of Hours:
+    </p>
+    <div class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <%= @projects.sum {|p| p.hours} %>
+      </span>
+    </div>
+  </header>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="column">
+      <% @projects.each do |project| %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong><%= project.project %></strong> <small>Total Hours Spent</small> <small><strong><%= project.hours %></strong></small>
+                <br>
+              </p>
+            </div>
+          </div>
+        </article>
+        <nav class="level is-mobile">
+          <a class="level-item">
+            <%= link_to 'Show', project, class:"button is-small course-button is-primary" %>
+          </a>
+          <a class="level-item">
+            <%= link_to 'Edit', edit_project_path(project), class:"button is-small course-button is-info" %>
+          </a>
+          <a class="level-item">
+            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-small course-button is-danger" %>
+          </a>
+        </nav>
+      <% end %>
+    </div>
+  </div>
+</section>
+<%= link_to 'Add Another Project', new_project_path, class:"button is-medium is-dark course-button" %>

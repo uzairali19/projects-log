@@ -9,7 +9,10 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1 or /projects/1.json
-  def show; end
+  def show
+    @project = Project.find(params[:id])
+    @course = @project.courses.all
+  end
 
   # GET /projects/new
   def new
@@ -65,6 +68,6 @@ class ProjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def project_params
-    params.require(:project).permit(:project, :hours)
+    params.require(:project).permit(:project, :hours, :course_id, :user_id)
   end
 end
