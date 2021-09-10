@@ -27,3 +27,27 @@
 .margin-auto {
   margin: auto;
 }
+
+.notification:not(:last-child) {
+  margin: 0;
+}
+
+.d-none {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar-end .field.is-grouped {
+    flex-direction: column;
+    text-align: center;
+
+    .button,
+    .control {
+      width: 100%;
+    }
+  }
+
+  .d-none {
+    display: block;
+  }
+}
