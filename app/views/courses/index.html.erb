@@ -6,22 +6,10 @@
         <%= course.course %>
       </p>
     </header>
-    <div class="card-content">
-      <% if @projects != nil %>
-        <%= @projects.each do |project| %>
-          <div class="content">
-            <%= link_to project.project %>
-            <%= link_to @user %>
-            <br>
-            <time datetime="2016-1-1"><%= project.created_at %></time>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
     <footer class="card-footer">
-      <%= link_to 'Show', course, class: "card-footer-item" %>
+      <%= link_to 'Show', course, class: "card-footer-item has-text-primary" %>
       <%= link_to 'Edit', edit_course_path(course), class: "card-footer-item" %>
-      <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: "card-footer-item" %>
+      <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: "card-footer-item has-text-danger" %>
     </footer>
   </div>
 <% end %>

@@ -5,12 +5,13 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @courses = Course.all.order('created_at DESC')
-    # @user = Project.all.user.find(params[:id])
-    @projects = Project.all.order('created_at DESC')
   end
 
   # GET /courses/1 or /courses/1.json
-  def show; end
+  def show
+    @course = Course.find(params[:id])
+    @projects = @course.projects.all
+  end
 
   # GET /courses/new
   def new
@@ -66,6 +67,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:course)
+    params.require(:course).permit(:course, :id)
   end
 end
