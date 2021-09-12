@@ -3,4 +3,9 @@ class Course < ApplicationRecord
 
   belongs_to :user
   has_many :projects
+
+  def allprojects
+    @projects = Course.all
+    @projects
+  end
 end

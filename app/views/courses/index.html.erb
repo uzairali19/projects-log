@@ -5,7 +5,38 @@
       <p class="card-header-title">
         <%= course.course %>
       </p>
+      <div class="card-header-icon" aria-label="more options">
+        <% if course.projects.exists? %>
+          <%= course.projects.sum {|p| p.hours} %>
+        <% else %>
+          <h5>No Projects available</h5>
+        <% end %>
+      </div>
     </header>
+    <div class="card-content">
+      <div class="content">
+        <% if course.projects.exists? %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th><abbr title="Position">Project</abbr></th>
+                <th>No. Of Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% course.projects.each do |project| %>
+                <tr>
+                  <th><%= link_to project.project,project_path(project.id)  %></th>
+                  <td><%= project.hours %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <h5>Please add some projects!!</h5>
+        <% end %>
+      </div>
+    </div>
     <footer class="card-footer">
       <%= link_to 'Show', course, class: "card-footer-item has-text-primary" %>
       <%= link_to 'Edit', edit_course_path(course), class: "card-footer-item" %>
