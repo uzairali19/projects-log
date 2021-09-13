@@ -14,12 +14,12 @@
   </div>
   <div class="field">
     <div class="control">
-      <%= f.input :hours, input_html: { class: "input is-medium" } , placeholder:"No Of Hours Spent" , type:"number", label:false, wrapper:false, collection: 0..100 %>
+      <%= f.input :hours, input_html: { class: "input is-medium" } , placeholder:"No. Of Hours Spent" , type:"number", label:false, wrapper:false %>
     </div>
   </div>
   <div class="field">
     <div class="control project-courses">
-      <%= f.collection_select  :course_id, Course.order(:course), :id, :course, include_blank: true %>
+      <%= f.collection_select  :course_id, Course.order(:course), :id, :course, placeholder:"Choose a project..." %>
     </div>
   </div>
   <div class="field">
