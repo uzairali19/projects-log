@@ -1,17 +1,17 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy like]
+  respond_to :js, :html, :json
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.includes(:user).order('Created_at DESC')
     @page_title = 'Projects'
   end
 
   # GET /projects/1 or /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @course = @project.courses.all
   end
 
   # GET /projects/new
@@ -56,6 +56,16 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def like
+    @project = Project.find(params[:id])
+    case params[:format]
+    when 'like'
+      @project.liked_by current_user
+    when 'unlike'
+      @project.unliked_by current_user
     end
   end
 

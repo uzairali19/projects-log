@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all.order('created_at DESC')
+    @courses = Course.includes(:projects).order('created_at DESC')
   end
 
   # GET /courses/1 or /courses/1.json

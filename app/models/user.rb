@@ -7,4 +7,5 @@ class User < ApplicationRecord
 
   has_many :projects
   has_many :courses
+  acts_as_voter
 end

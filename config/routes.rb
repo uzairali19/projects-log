@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do
+    member do
+      put "like" => "projects#like"
+    end
+  end
   resources :courses
   devise_for :users, :controllers => { registrations: "registrations" }
   resources :users
