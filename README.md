@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-TBA
+[Heroku](https://uzair-project-log.herokuapp.com/users/sign_in)
 
 ## Getting Started
 
@@ -17,9 +17,9 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-Ruby: 3.0.0
-Rails: 6.1.4.1
-Postgres: >=13.3
+- Ruby: 3.0.0
+- Rails: 6.1.4.1
+- Postgres: >=13.3
 
 ### Setup
 
@@ -58,14 +58,10 @@ Open `http://localhost:3000/` in your browser.
 ### Run tests
 
 ```
-    rpsec --format documentation
+    rails spec
 ```
 
 > Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
-
-### Deployment
-
-TBA
 
 ## Authors
 
