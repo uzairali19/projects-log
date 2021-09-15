@@ -28,9 +28,6 @@ gem 'jbuilder', '~> 2.7'
 # Devise gem for users
 gem 'devise', '~> 4.8'
 
-# Bulma gem for styling
-gem 'bulma-rails', '~> 0.9.1'
-
 # Simple_form gem for forms
 gem 'simple_form', '~> 5.1'
 
