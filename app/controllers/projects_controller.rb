@@ -5,8 +5,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.includes(:user).order('Created_at DESC')
+    @projects = Project.includes(:user, :course).order('Created_at DESC')
     @page_title = 'Projects'
+    @courses = Course.all
   end
 
   # GET /projects/1 or /projects/1.json
