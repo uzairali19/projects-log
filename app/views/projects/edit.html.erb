@@ -1,6 +1,4 @@
-<h1>Editing Project</h1>
-
+<% @page_title = "Editing Project"  %>
 <%= render 'form', project: @project %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Show', @project, class:"button is-medium is-success course-button" %>
+<%= link_to 'Back', projects_path, class:"button is-medium is-danger course-button" %>

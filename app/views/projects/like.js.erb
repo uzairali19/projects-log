@@ -1,0 +1,8 @@
+$('.liked_btn').on('ajax:success'),function(){
+$(this).parent().find('.like_count').html('<%= @project.get_likes.size %> &#128591');
+$(this).closest('.liked_btn').html('Liked');
+}
+$('.like_btn').on('ajax:success'),function(){
+$(this).parent().find('.like_count').html('<%= @project.get_likes.size %> &#128591');
+$(this).closest('.like_btn').html('Like');
+}

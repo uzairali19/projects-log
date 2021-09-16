@@ -1,6 +1,4 @@
-<h1>Editing Course</h1>
-
+<% @page_title="Edit Course"%>
 <%= render 'form', course: @course %>
-
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'Show', @course, class: "button is-primary course-button" %>
+<%= link_to 'Back', courses_path, class: "button is-dark course-button" %>

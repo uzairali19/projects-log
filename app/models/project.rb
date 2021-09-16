@@ -1,7 +1,8 @@
 class Project < ApplicationRecord
   validates :project, presence: true, length: { maximum: 50 }
   validates :hours, presence: true
+  acts_as_votable
 
   belongs_to :user
-  has_many :courses
+  belongs_to :course, required: false
 end

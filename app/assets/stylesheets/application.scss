@@ -14,4 +14,60 @@
  *= require_self
  */
 
-@import "Bulma";
+* {
+  overflow: hidden;
+}
+
+.navbar {
+  background-color: #3778c2;
+}
+
+.navbar-burger {
+  margin-left: 0;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.notification:not(:last-child) {
+  margin: 0;
+}
+
+.d-none {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar-end .field.is-grouped {
+    flex-direction: column;
+    text-align: center;
+
+    .button,
+    .control {
+      width: 100%;
+    }
+  }
+
+  .d-none {
+    display: block;
+  }
+
+  .main-card {
+    margin-top: 30px;
+  }
+
+  .course-button {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .start-form {
+    margin-top: 20px;
+  }
+
+  .project-courses > select {
+    width: 100%;
+    height: 50px;
+  }
+}

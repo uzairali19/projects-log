@@ -1,14 +1,30 @@
-
 <%= simple_form_for(@project) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.input :project %>
-    <%= f.input :hours %>
+  <div class="field start-form">
+    <div class="control">
+      <%= f.input :project,
+        required: true,
+        autofocus: true,
+        label: false,
+        placeholder: "Project Name",
+        wrapper: false,
+        input_html: { class: "input is-medium" } %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="field">
+    <div class="control">
+      <%= f.input :hours, input_html: { class: "input is-medium" } , placeholder:"No. Of Hours Spent" , type:"number", label:false, wrapper:false %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control project-courses">
+      <%= f.collection_select  :course_id, Course.order(:course), :id, :course, include_blank: true, required: false %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <%= f.button :submit,class:"button is-link course-button" %>
+    </div>
   </div>
 <% end %>

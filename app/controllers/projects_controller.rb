@@ -1,25 +1,34 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  before_action only: %i[show edit update destroy like external internal]
+  respond_to :js, :html, :json
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.includes(:user, :course).references(:course).merge(Course.where.not(id: nil))
+    @external_projects = Project.includes(:course).where(course: { id: nil }).references(:course)
+    @page_title = 'Projects'
+    @courses = Course.all
   end
 
   # GET /projects/1 or /projects/1.json
-  def show; end
+  def show
+    @project = Project.find(params[:id])
+  end
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = current_user.projects.build
   end
 
   # GET /projects/1/edit
-  def edit; end
+  def edit
+    @project = Project.find(params[:id])
+  end
 
   # POST /projects or /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
 
     respond_to do |format|
       if @project.save
@@ -54,15 +63,33 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def like
+    @project = Project.find(params[:id])
+    case params[:format]
+    when 'like'
+      @project.liked_by current_user
+    when 'unlike'
+      @project.unliked_by current_user
+    end
+  end
+
+  def external
+    @external_projects = Project.includes(:course).where(course: { id: nil }).references(:course)
+  end
+
+  def internal
+    @projects = Project.includes(:user, :course).references(:course).merge(Course.where.not(id: nil))
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_project
-    @project = Project.find(params[:id])
-  end
+  # def set_project
+  #   @project = Project.find(params[:id])
+  # end
 
   # Only allow a list of trusted parameters through.
   def project_params
-    params.require(:project).permit(:project, :hours)
+    params.require(:project).permit(:project, :hours, :course_id, :user_id)
   end
 end

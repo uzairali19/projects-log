@@ -1,14 +1,31 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Project:</strong>
-  <%= @project.project %>
-</p>
-
-<p>
-  <strong>Hours:</strong>
-  <%= @project.hours %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<% @page_title = "Project" %>
+<article class="panel is-link mt-5">
+  <p class="panel-heading">
+    Project: <%= @project.project %>
+  </p>
+  <a class="panel-block is-active">
+    <div>
+      <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+      </span>
+      <strong>Hours:</strong>
+      <%= @project.hours %>
+    </div>
+    <div>
+      <span class="parent-likes">
+        <span class="like_count" <%= @project.id %>>
+          <%= @project.get_likes.size %>&#128591
+        </span>
+        <a>
+          <% if current_user.liked? @project %>
+            <div><%= link_to like_project_path(@project, 'unlike'), class: "liked_btn", method: :put, remote: :true do %>Liked<% end %></div>
+          <% else %>
+            <div><%= link_to like_project_path(@project, 'like'), class: "like_btn", method: :put, remote: :true do %>Like<% end %> </div>
+          <% end %>
+        </a>
+      </span>
+    </div>
+  </a>
+</article>
+<%= link_to 'Edit', edit_project_path(@project), class: "button is-primary" %>
+<%= link_to 'Back', projects_path, class: "button is-danger" %>

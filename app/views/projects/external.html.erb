@@ -1,0 +1,55 @@
+<% @page_title="External Projects"  %>
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      External projects hours:
+    </p>
+    <div class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <%= @external_projects.sum {|e| e.hours} %>
+      </span>
+    </div>
+  </header>
+</div>
+<section class="section px-0">
+  <div class="container">
+    <div class="column">
+      <% @external_projects.each do |project| %>
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4"><%= link_to project.project, project_path(project) %></p>
+              </div>
+              <div class="media-right">
+                <p class="subtitle is-6"><%= project.hours %></p>
+              </div>
+            </div>
+            <div class="content">
+              <br>
+              <time datetime="2016-1-1"><%= project.created_at %></time>
+            </div>
+          </div>
+        </div>
+        <nav class="level is-mobile">
+          <a class="level-item">
+            <%= link_to 'Show', project, class:"button is-small course-button is-primary" %>
+          </a>
+          <a class="level-item">
+            <%= link_to 'Edit', edit_project_path(project), class:"button is-small course-button is-info" %>
+          </a>
+          <a class="level-item">
+            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-small course-button is-danger" %>
+          </a>
+        </nav>
+      <% end %>
+    </div>
+  </div>
+</section>
+<%= link_to 'Add Another Project', new_project_path, class:"button is-medium is-dark course-button" %>
+<%= link_to 'Go Back To Projects', projects_path, class:"button is-medium is-danger course-button"%>

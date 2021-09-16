@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TransactionLog</title>
+    <title>Projects Log</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   </head>
-
   <body>
-   <% if flash[:notice] %>
+    <% if flash[:notice] %>
       <div class="notification is-primary global-notification" id="notice_wrapper">
         <p class="notice"><%= notice %></p>
       </div>
@@ -20,6 +21,18 @@
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>
+    <%= render "layouts/nav" %>
     <%= yield %>
+    <script>
+      notice = document.getElementById('notice_wrapper');
+      alert = document.getElementById('notice_alert');
+      removeNotice = setTimeout(function () {
+      notice.remove();
+        }, 3000);
+      alertNotice = setTimeout(function () {
+      alert.remove();
+        }, 3000);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </body>
 </html>

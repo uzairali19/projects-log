@@ -1,17 +1,21 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_course, only: %i[show edit update destroy]
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.includes(:projects, :user).order('created_at DESC')
   end
 
   # GET /courses/1 or /courses/1.json
-  def show; end
+  def show
+    @course = Course.find(params[:id])
+    @projects = @course.projects.all
+  end
 
   # GET /courses/new
   def new
-    @course = Course.new
+    @course = current_user.courses.build
   end
 
   # GET /courses/1/edit
@@ -19,7 +23,7 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
-    @course = Course.new(course_params)
+    @course = current_user.courses.build(course_params)
 
     respond_to do |format|
       if @course.save
@@ -63,6 +67,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:course)
+    params.require(:course).permit(:course, :id)
   end
 end

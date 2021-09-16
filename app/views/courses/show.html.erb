@@ -1,9 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Course:</strong>
-  <%= @course.course %>
-</p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<% @page_title = "View Course" %>
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">  <%= @course.course %></p>
+        <p class="subtitle is-6">Created by: <%= @course.user.name %></p>
+      </div>
+    </div>
+    <div class="content">
+      <% if @projects.exists?%>
+        <% @projects.each do |project| %>
+          <h2>Project Name: <%= link_to project.project, project_path(project.id) %></h2>
+          <time datetime="2016-1-1">Created at: <%= project.created_at %></time>
+        <% end %>
+      <% else %>
+        <h2>No projects listed</h2>
+        <%= link_to "Add new project", new_project_path, class: "button is-small course-button is-primary" %>
+      <% end%>
+    </div>
+  </div>
+</div>
+<%= link_to 'Edit', edit_course_path(@course), class: "button is-medium course-button is-dark" %>
+<%= link_to 'Back', courses_path, class: "button is-medium course-button is-danger" %>

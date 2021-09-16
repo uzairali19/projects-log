@@ -1,0 +1,51 @@
+<nav class="navbar">
+  <div class="columns is-mobile is-align-items-center m-0">
+    <div class="column">
+      <div class="navbar-brand">
+        <a role="button" class="navbar-burger has-text-white" onclick="navbar(event, 'is-active')" >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+    <div class="column is-half">
+      <%= link_to request.path || session_path(resource_name) , class: "navbar-item has-text-centered margin-auto" do  %>
+        <h1 class="title is-6 has-text-white"><%= @page_title || "Projects" %></h1>
+      <% end %>
+    </div>
+    <div class="column has-text-right"><%= link_to root_path, class: "navbar-item" do%>
+        <%= image_tag("marketing.png", :alt => "Logo") %>
+      <% end %></div>
+  </div>
+  <div id="navbar" class="navbar-menu">
+    <aside class="menu d-none">
+      <p class="menu-label">
+        Courses
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to 'All My Courses', courses_path, class:"button is-warning"%></li>
+      </ul>
+      <p class="menu-label">
+        Projects
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to 'All My Projects', projects_path, class:"button is-white"%></li>
+        <li><%= link_to 'All My External Projects', external_projects_path, class:"button is-white"%></li>
+        <li><%= link_to 'All My Grouped Projects', internal_projects_path, class:"button is-white"%></li>
+      </ul>
+      <p class="menu-label">
+        User Settings
+      </p>
+      <ul class="menu-list">
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.name, edit_user_registration_path, class:"button is-info"%></li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class:"button is-danger"%></li>
+        <% else %>
+          <li><%= link_to 'Sign In', new_user_session_path , class:"button is-info"%></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path , class:"button is-success"%></li>
+        <% end %>
+      </ul>
+    </aside>
+  </div>
+</nav>
