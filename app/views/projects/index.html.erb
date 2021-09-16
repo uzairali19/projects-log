@@ -1,35 +1,92 @@
-<% @page_title="Projects"  %>
+<% @page_title="All Projects"  %>
 <div class="card">
   <header class="card-header">
     <p class="card-header-title">
-      Total No. Of Hours:
+      All projects hours:
     </p>
     <div class="card-header-icon" aria-label="more options">
       <span class="icon">
-        <%= @projects.sum {|p| p.hours} %>
+        <%= @external_projects.sum {|e| e.hours} + @projects.sum {|p| p.hours} %>
       </span>
     </div>
   </header>
 </div>
-<section class="section">
+<section class="section px-0">
   <div class="container">
     <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            <%= link_to "Internal Projects", internal_projects_path  %>
+          </p>
+        </header>
+      </div>
       <% @projects.each do |project| %>
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-          </figure>
-          <div class="media-content">
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4"><%= link_to project.project, project_path(project) %></p>
+              </div>
+              <div class="media-right">
+                <p class="subtitle is-6"><%= project.hours %></p>
+              </div>
+            </div>
             <div class="content">
-              <p>
-                <strong><%= project.project %></strong> <small>Total Hours Spent</small> <small><strong><%= project.hours %></strong></small>
-                <br>
-              </p>
+              Course Name: <%= link_to project.course.course, course_path(project.course) %>
+              <br>
+              <time datetime="2016-1-1"><%= project.created_at %></time>
             </div>
           </div>
-        </article>
+        </div>
+        <nav class="level is-mobile">
+          <a class="level-item">
+            <%= link_to 'Show', project, class:"button is-small course-button is-primary" %>
+          </a>
+          <a class="level-item">
+            <%= link_to 'Edit', edit_project_path(project), class:"button is-small course-button is-info" %>
+          </a>
+          <a class="level-item">
+            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-small course-button is-danger" %>
+          </a>
+        </nav>
+      <% end %>
+    </div>
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            <%= link_to "External Projects", external_projects_path  %>
+          </p>
+        </header>
+      </div>
+      <% @external_projects.each do |project| %>
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4"><%= link_to project.project, project_path(project) %></p>
+              </div>
+              <div class="media-right">
+                <p class="subtitle is-6"><%= project.hours %></p>
+              </div>
+            </div>
+            <div class="content">
+              <br>
+              <time datetime="2016-1-1"><%= project.created_at %></time>
+            </div>
+          </div>
+        </div>
         <nav class="level is-mobile">
           <a class="level-item">
             <%= link_to 'Show', project, class:"button is-small course-button is-primary" %>

@@ -4,5 +4,5 @@ class Project < ApplicationRecord
   acts_as_votable
 
   belongs_to :user
-  belongs_to :course
+  belongs_to :course, required: false
 end

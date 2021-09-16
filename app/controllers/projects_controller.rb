@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[show edit update destroy like]
+  before_action only: %i[show edit update destroy like external internal]
   respond_to :js, :html, :json
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.includes(:user, :course).order('Created_at DESC')
+    @projects = Project.includes(:user, :course).references(:course).merge(Course.where.not(id: nil))
+    @external_projects = Project.includes(:course).where(course: { id: nil }).references(:course)
     @page_title = 'Projects'
     @courses = Course.all
   end
@@ -70,12 +71,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def external
+    @external_projects = Project.includes(:course).where(course: { id: nil }).references(:course)
+  end
+
+  def internal
+    @projects = Project.includes(:user, :course).references(:course).merge(Course.where.not(id: nil))
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_project
-    @project = Project.find(params[:id])
-  end
+  # def set_project
+  #   @project = Project.find(params[:id])
+  # end
 
   # Only allow a list of trusted parameters through.
   def project_params

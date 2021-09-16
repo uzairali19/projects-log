@@ -14,6 +14,10 @@
  *= require_self
  */
 
+* {
+  overflow: hidden;
+}
+
 .navbar {
   background-color: #3778c2;
 }

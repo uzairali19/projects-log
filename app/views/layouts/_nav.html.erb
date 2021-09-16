@@ -1,16 +1,22 @@
 <nav class="navbar">
-  <div class="navbar-brand">
-    <%= link_to root_path, class: "navbar-item" do%>
-      <%= image_tag("marketing.png", :alt => "Logo") %>
-    <% end %>
-    <%= link_to request.path || session_path(resource_name) , class: "navbar-item is-centered margin-auto" do  %>
-      <h1 class="title is-6 has-text-white"><%= @page_title || "Projects" %></h1>
-    <% end %>
-    <a role="button" class="navbar-burger has-text-white" onclick="navbar(event, 'is-active')" >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+  <div class="columns is-mobile is-align-items-center m-0">
+    <div class="column">
+      <div class="navbar-brand">
+        <a role="button" class="navbar-burger has-text-white" onclick="navbar(event, 'is-active')" >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+    <div class="column is-half">
+      <%= link_to request.path || session_path(resource_name) , class: "navbar-item has-text-centered margin-auto" do  %>
+        <h1 class="title is-6 has-text-white"><%= @page_title || "Projects" %></h1>
+      <% end %>
+    </div>
+    <div class="column has-text-right"><%= link_to root_path, class: "navbar-item" do%>
+        <%= image_tag("marketing.png", :alt => "Logo") %>
+      <% end %></div>
   </div>
   <div id="navbar" class="navbar-menu">
     <aside class="menu d-none">
@@ -18,15 +24,15 @@
         Courses
       </p>
       <ul class="menu-list">
-        <li><%= link_to 'Create New Course', new_course_path, class:"button is-dark"%></li>
-        <li><%= link_to 'View All Courses', courses_path, class:"button is-warning"%></li>
+        <li><%= link_to 'All My Courses', courses_path, class:"button is-warning"%></li>
       </ul>
       <p class="menu-label">
         Projects
       </p>
       <ul class="menu-list">
-        <li><%= link_to 'Create New Project', new_project_path, class:"button is-white"%></li>
-        <li><%= link_to 'View All Projects', projects_path, class:"button is-white"%></li>
+        <li><%= link_to 'All My Projects', projects_path, class:"button is-white"%></li>
+        <li><%= link_to 'All My External Projects', external_projects_path, class:"button is-white"%></li>
+        <li><%= link_to 'All My Grouped Projects', internal_projects_path, class:"button is-white"%></li>
       </ul>
       <p class="menu-label">
         User Settings
