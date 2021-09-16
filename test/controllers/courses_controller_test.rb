@@ -2,6 +2,9 @@ require 'test_helper'
 
 class CoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    get '/users/sign_in'
+    sign_in users(:user1)
+    post user_session_url
     @course = courses(:one)
   end
 
